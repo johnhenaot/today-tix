@@ -1,3 +1,6 @@
+import io.getListOfPasswords
+import java.io.File
+
 val vowels = "aeiou".toCharArray()
 
 fun String.hasVowel(): Boolean =
@@ -48,3 +51,21 @@ fun String.hasValidRepetitionPattern() =
             else -> true
         }
     }.reduce(Boolean::and)
+
+private fun String.isValidPassword(): Boolean =
+    hasVowel() and hasValidThreeLessPattern() and
+            hasValidThreeLessPattern(false) and hasValidRepetitionPattern()
+
+private fun List<String>.validatePasswords(): Unit =
+    map { it.isValidPassword() }
+        .let { validationList ->
+            indices.asSequence()
+                .forEach {
+                    val message = if (!validationList[it]) "not" else ""
+
+                    println("<${this[it]}> is $message acceptable")
+                }
+        }
+
+fun validatePasswords(filePath: String) =
+    File(filePath).getListOfPasswords().validatePasswords()
