@@ -37,5 +37,20 @@ class PasswordValidatorSpec : WordSpec() {
                 testPassword.hasValidThreeLessPattern(false) shouldBe false
             }
         }
+
+        "hasNoRepetitions" should {
+            "hasNoRepetitions: should return false when no allowed repetitions" {
+                val testPassword = "ooooooqqoooohgdjnghr"
+
+                testPassword.hasValidRepetitionPattern() shouldBe false
+            }
+
+            "hasNoRepetitions: should return true when allowed repetitions" {
+                listOf("look", "see", "food", "understood", "google", "feet", "meet", "steel")
+                    .map {
+                        it.hasValidRepetitionPattern() shouldBe true
+                    }
+            }
+        }
     }
 }

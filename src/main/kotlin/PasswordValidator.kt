@@ -38,3 +38,13 @@ private fun List<Boolean>.getNumberOfThreeLessPatternViolations() =
         (this.getOrNull(onesIndex + 1) ?: false) and
                 (this.getOrNull(onesIndex + 2) ?: false)
     }.toList().filter { it }.count()
+
+fun String.hasValidRepetitionPattern() =
+    indices.asSequence().map {
+        when {
+            this[it] in charArrayOf('e', 'o') -> true
+            it == 0 -> true
+            this[it - 1] == this[it] -> false
+            else -> true
+        }
+    }.reduce(Boolean::and)
