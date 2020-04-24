@@ -18,17 +18,23 @@ class PasswordValidatorSpec : WordSpec() {
             }
         }
 
-        "hasValidSequence" should {
-            "hasValidSequence: should return false when three consecutive vowels" {
+        "hasValidThreeLessPattern" should {
+            "hasValidThreeLessPattern: should return false when three consecutive vowels" {
                 val testPassword = "aeitru"
 
-                testPassword.hasValidSequence() shouldBe false
+                testPassword.hasValidThreeLessPattern() shouldBe false
             }
 
-            "hasValidSequence: should return true when three consecutive vowels" {
+            "hasValidThreeLessPattern: should return true when pattern is valid" {
                 val testPassword = "aetru"
 
-                testPassword.hasValidSequence() shouldBe true
+                testPassword.hasValidThreeLessPattern() shouldBe true
+            }
+
+            "hasValidThreeLessPattern: should return false when three consecutive consonats" {
+                val testPassword = "armtru"
+
+                testPassword.hasValidThreeLessPattern(false) shouldBe false
             }
         }
     }
